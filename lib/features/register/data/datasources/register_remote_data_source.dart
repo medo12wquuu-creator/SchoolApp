@@ -10,6 +10,6 @@ class RegisterRemoteDataSource {
     final response = await dio.post(EndPoints.register, data: body);
     print("${response.statusCode}");
     print("${response.statusMessage}");
-    return response.data;
+    return {"statusCode": response.statusCode, "data": response.data};
   }
 }
