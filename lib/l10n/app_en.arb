@@ -1,0 +1,16 @@
+{
+"school": "School",
+"alSaada": "Al-Saada",
+
+"register": "Register",
+"login": "Login",
+"email": "Email",
+"phone": "Phone Number",
+"firstName": "First Name",
+"lastName": "Last Name",
+"password": "Password",
+
+"waitAccept": "Wait your accept, please.",
+"reject": "Sorry! Your request has been rejected❌. Please contact the Al-Saada School to verify the issue.",
+"accept": "You've been successfully accepted✅"
+}
