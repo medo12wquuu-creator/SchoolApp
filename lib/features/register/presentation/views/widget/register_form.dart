@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:school_app/core/constants/colors.constants.dart';
 import 'package:school_app/core/theme/theme_cubit.dart';
 import 'package:school_app/features/otp/presentation/views/otp.dart';
+import 'package:school_app/features/register/presentation/view_models/register_cubit.dart';
 
 class RegisterForm extends StatelessWidget {
   const RegisterForm({super.key});
@@ -25,18 +26,25 @@ class RegisterForm extends StatelessWidget {
         children: [
           //                                                                               FirstName field        //
           SizedBox(height: 30),
+          // ======================= First Name Field =======================
+          Text(
+            "First Name",
+            style: TextStyle(color: Color.fromARGB(255, 55, 165, 255)),
+          ),
+
           ClipRRect(
             borderRadius: BorderRadius.circular(14),
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
               child: TextFormField(
                 controller: firstNameController,
+                onChanged: (v) => context.read<RegisterCubit>().setFirstName(v),
                 style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
                 decoration: InputDecoration(
                   hintText: "First Name",
                   hintStyle: const TextStyle(color: kHintTextColor),
                   prefixIcon: const Icon(
-                    Icons.person_outline_outlined,
+                    Icons.person_outline, // ← تم تصحيح الأيقونة
                     color: kSecondlyColor,
                   ),
                   filled: true,
@@ -56,19 +64,30 @@ class RegisterForm extends StatelessWidget {
               ),
             ),
           ),
-          //                                                                               LastName field        //
+
           SizedBox(height: 16),
+
+          // ======================= Last Name Field =======================
+          Text(
+            "Last Name",
+            style: TextStyle(color: Color.fromARGB(255, 55, 165, 255)),
+          ),
+
           ClipRRect(
             borderRadius: BorderRadius.circular(14),
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
               child: TextFormField(
                 controller: lastNameController,
+                onChanged: (v) => context.read<RegisterCubit>().setLastName(v),
                 style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
                 decoration: InputDecoration(
                   hintText: "Last Name",
                   hintStyle: const TextStyle(color: kHintTextColor),
-                  prefixIcon: const Icon(Icons.person, color: kSecondlyColor),
+                  prefixIcon: const Icon(
+                    Icons.person, // أيقونة مناسبة للاسم الأخير
+                    color: kSecondlyColor,
+                  ),
                   filled: true,
                   fillColor: const Color.fromARGB(
                     125,
@@ -88,12 +107,20 @@ class RegisterForm extends StatelessWidget {
           ),
           //                                                                               Email field        //
           SizedBox(height: 16),
+          // ======================= Email Field =======================
+          Text(
+            "Email Address",
+            style: TextStyle(color: Color.fromARGB(255, 55, 165, 255)),
+          ),
+
           ClipRRect(
             borderRadius: BorderRadius.circular(14),
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
               child: TextFormField(
                 controller: emailController,
+                keyboardType: TextInputType.emailAddress,
+                onChanged: (v) => context.read<RegisterCubit>().setEmail(v),
                 style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
                 decoration: InputDecoration(
                   hintText: "Email",
@@ -114,7 +141,6 @@ class RegisterForm extends StatelessWidget {
                     borderSide: BorderSide.none,
                   ),
                 ),
-                keyboardType: TextInputType.emailAddress,
                 validator: (value) {
                   if (value!.isEmpty) return "Email is required";
                   if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
@@ -125,8 +151,15 @@ class RegisterForm extends StatelessWidget {
               ),
             ),
           ),
-          //                                                                               phonNumber field        //
+
           SizedBox(height: 16),
+
+          // ======================= Phone Number Field =======================
+          Text(
+            "Phone Number",
+            style: TextStyle(color: Color.fromARGB(255, 55, 165, 255)),
+          ),
+
           ClipRRect(
             borderRadius: BorderRadius.circular(14),
             child: BackdropFilter(
@@ -134,6 +167,7 @@ class RegisterForm extends StatelessWidget {
               child: TextFormField(
                 controller: phoneController,
                 keyboardType: TextInputType.number,
+                onChanged: (v) => context.read<RegisterCubit>().setPhone(v),
                 style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
                 decoration: InputDecoration(
                   hintText: "Phone number 09XXXXXXXX",
@@ -161,23 +195,31 @@ class RegisterForm extends StatelessWidget {
                     return "Phone Number is lower than 10 numbers, try again";
                   } else if (value.length > 10) {
                     return "Phone Number is more than 10 numbers, try again";
-                  } else
+                  } else {
                     return null;
+                  }
                 },
               ),
             ),
           ),
           //                                                                               password field        //
           SizedBox(height: 16),
+          Text(
+            "Password",
+            style: TextStyle(color: Color.fromARGB(255, 55, 165, 255)),
+          ),
+
           ClipRRect(
             borderRadius: BorderRadius.circular(14),
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
               child: TextFormField(
                 controller: passwordController,
+                obscureText: true, // إخفاء كلمة المرور
+                onChanged: (v) => context.read<RegisterCubit>().setPassword(v),
                 style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
                 decoration: InputDecoration(
-                  hintText: "Password",
+                  hintText: "Enter your password",
                   hintStyle: const TextStyle(color: kHintTextColor),
                   prefixIcon: const Icon(Icons.lock, color: kSecondlyColor),
                   filled: true,
@@ -192,10 +234,15 @@ class RegisterForm extends StatelessWidget {
                     borderSide: BorderSide.none,
                   ),
                 ),
-                obscureText: true,
-                validator: (value) => value!.length < 6
-                    ? "Password must be at least 6 characters"
-                    : null,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Password is required";
+                  } else if (value.length < 6) {
+                    return "Password must be at least 6 characters";
+                  } else {
+                    return null;
+                  }
+                },
               ),
             ),
           ),
@@ -204,18 +251,8 @@ class RegisterForm extends StatelessWidget {
           ElevatedButton(
             onPressed: () {
               if (formKey.currentState!.validate()) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text("تم إرسال طلبك، يرجى انتظار الموافقة "),
-                    duration: Duration(seconds: 3),
-                  ),
-                );
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (_) => OtpPage()),
-                );
+                context.read<RegisterCubit>().register();
               }
-              // هنا تستدعي الـ Cubit أو ViewModel للتسجيل
             },
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 14),
