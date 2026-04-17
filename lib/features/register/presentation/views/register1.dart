@@ -32,8 +32,8 @@ class Register extends StatelessWidget {
             AwesomeDialog(
               context: context,
               dialogType: DialogType.success,
-              title: "Accepted",
-              desc: "Your account has been approved!",
+              title: "Sent✅",
+              desc: "Your Information is sent succesfully!",
               btnOkOnPress: () {
                 Navigator.push(
                   context,
@@ -48,7 +48,7 @@ class Register extends StatelessWidget {
               context: context,
               dialogType: DialogType.warning,
               title: "Pending",
-              desc: "Your account is under review. Please wait for approval.",
+              desc: "Error, please try again!",
             ).show();
           }
         },

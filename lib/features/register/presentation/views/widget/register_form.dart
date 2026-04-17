@@ -24,14 +24,12 @@ class RegisterForm extends StatelessWidget {
       key: formKey,
       child: ListView(
         children: [
-          //                                                                               FirstName field        //
           SizedBox(height: 30),
           // ======================= First Name Field =======================
           Text(
             "First Name",
             style: TextStyle(color: Color.fromARGB(255, 55, 165, 255)),
           ),
-
           ClipRRect(
             borderRadius: BorderRadius.circular(14),
             child: BackdropFilter(
@@ -64,7 +62,6 @@ class RegisterForm extends StatelessWidget {
               ),
             ),
           ),
-
           SizedBox(height: 16),
 
           // ======================= Last Name Field =======================
@@ -72,7 +69,6 @@ class RegisterForm extends StatelessWidget {
             "Last Name",
             style: TextStyle(color: Color.fromARGB(255, 55, 165, 255)),
           ),
-
           ClipRRect(
             borderRadius: BorderRadius.circular(14),
             child: BackdropFilter(
@@ -105,14 +101,13 @@ class RegisterForm extends StatelessWidget {
               ),
             ),
           ),
-          //                                                                               Email field        //
           SizedBox(height: 16),
+
           // ======================= Email Field =======================
           Text(
             "Email Address",
             style: TextStyle(color: Color.fromARGB(255, 55, 165, 255)),
           ),
-
           ClipRRect(
             borderRadius: BorderRadius.circular(14),
             child: BackdropFilter(
@@ -151,7 +146,6 @@ class RegisterForm extends StatelessWidget {
               ),
             ),
           ),
-
           SizedBox(height: 16),
 
           // ======================= Phone Number Field =======================
@@ -159,7 +153,6 @@ class RegisterForm extends StatelessWidget {
             "Phone Number",
             style: TextStyle(color: Color.fromARGB(255, 55, 165, 255)),
           ),
-
           ClipRRect(
             borderRadius: BorderRadius.circular(14),
             child: BackdropFilter(
@@ -202,13 +195,13 @@ class RegisterForm extends StatelessWidget {
               ),
             ),
           ),
-          //                                                                               password field        //
           SizedBox(height: 16),
+
+          // ======================= Password Field =======================
           Text(
             "Password",
             style: TextStyle(color: Color.fromARGB(255, 55, 165, 255)),
           ),
-
           ClipRRect(
             borderRadius: BorderRadius.circular(14),
             child: BackdropFilter(
@@ -246,8 +239,9 @@ class RegisterForm extends StatelessWidget {
               ),
             ),
           ),
-          //                                                                               Register Button        //
           SizedBox(height: 30),
+
+          // ====================== Register Button ========================
           ElevatedButton(
             onPressed: () {
               if (formKey.currentState!.validate()) {

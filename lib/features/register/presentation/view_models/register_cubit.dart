@@ -7,21 +7,18 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   RegisterCubit(this.repo) : super(RegisterInitial());
 
-  // المتغيرات التي سيتم تعبئتها من TextFields
   String firstName = '';
   String lastName = '';
   String email = '';
   String phone = '';
   String password = '';
 
-  // دوال تحديث القيم
   void setFirstName(String v) => firstName = v;
   void setLastName(String v) => lastName = v;
   void setEmail(String v) => email = v;
   void setPhone(String v) => phone = v;
   void setPassword(String v) => password = v;
 
-  // دالة التسجيل
   Future<void> register() async {
     emit(RegisterLoading());
 

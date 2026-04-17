@@ -15,7 +15,6 @@ class RegisterBody extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: const [
               RegisterHeader(),
-
               Expanded(child: RegisterForm()),
               SizedBox(height: 20),
             ],

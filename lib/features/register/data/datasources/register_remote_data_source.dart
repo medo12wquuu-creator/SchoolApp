@@ -8,8 +8,13 @@ class RegisterRemoteDataSource {
 
   Future<Map<String, dynamic>> register(Map<String, dynamic> body) async {
     final response = await dio.post(EndPoints.register, data: body);
-    print("${response.statusCode}");
-    print("${response.statusMessage}");
-    return {"statusCode": response.statusCode, "data": response.data};
+    // print("${response.statusCode}");
+    // print("${response.statusMessage}");
+    return {
+      "statusCode": response.statusCode,
+      "message": response.statusMessage,
+      "data": response.data,
+    };
+    // return response; ألا يجب عليي ان اقول هكذا ؟
   }
 }

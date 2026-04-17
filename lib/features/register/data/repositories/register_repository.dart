@@ -13,7 +13,7 @@ class RegisterRepository {
     required String phone,
     required String password,
   }) async {
-    final result = await remote.register({
+    final Map<String, dynamic> result = await remote.register({
       "first_name": firstName,
       "last_name": lastName,
       "email": email,
@@ -22,18 +22,21 @@ class RegisterRepository {
     });
 
     final status = result["statusCode"];
+    final message = result["message"];
     final data = result["data"];
 
     if (status == 200) {
       return RegisterResponse(
         success: true,
-        message: "Accepted",
+        message: "Right Sent info✅",
+        // message: "${message}", هي المفروض مجد  يكون كاتبا عندو ويبعتلي اياها أو أنا بكتبها عند بالسطر يلي قبل
         statusCode: 200,
       );
     } else {
       return RegisterResponse(
         success: false,
-        message: "Pending approval",
+        message: "Wrong Sent info❌",
+        // message: "${message}", وهي نفس اللي قبلها
         statusCode: status,
       );
     }
